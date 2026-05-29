@@ -23,8 +23,6 @@
   }
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
   html, body { height: 100%; background: var(--bg); font-family: 'Outfit', sans-serif; color: var(--text); overflow-x: hidden; }
-
-  /* ── HEADER ── */
   .header {
     background: linear-gradient(135deg, #023e8a 0%, #0077b6 60%, #00b4d8 100%);
     padding: 14px 18px 12px;
@@ -47,8 +45,6 @@
   }
   .hled.off { background: var(--red); box-shadow: 0 0 10px var(--red); animation: none; }
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.4} }
-
-  /* ── NAV ── */
   .nav {
     display: flex; background: var(--surface);
     border-bottom: 1px solid var(--border);
@@ -65,12 +61,8 @@
   }
   .ntab .ico { font-size: 17px; }
   .ntab.on { color: var(--accent); border-bottom-color: var(--accent); }
-
-  /* ── CONTENT ── */
   .page { display: none; padding: 14px; flex-direction: column; gap: 12px; }
   .page.on { display: flex; }
-
-  /* ── CARD ── */
   .card {
     background: var(--card); border: 1px solid var(--border);
     border-radius: 14px; padding: 15px;
@@ -80,8 +72,6 @@
     letter-spacing: 1px; text-transform: uppercase;
     margin-bottom: 12px; display: flex; align-items: center; gap: 6px;
   }
-
-  /* ── AMOUNT ── */
   .amtbox {
     background: linear-gradient(135deg, #023e8a, #0077b6 70%, #00b4d8);
     border-radius: 14px; padding: 22px 16px 18px;
@@ -100,8 +90,6 @@
     letter-spacing: -1px; transition: color .2s;
   }
   .amtval.has { color: #fff; text-shadow: 0 0 30px rgba(6,214,160,.3); }
-
-  /* ── NUMPAD ── */
   .numpad { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
   .nkey {
     background: var(--surface); border: 1px solid var(--border);
@@ -114,8 +102,6 @@
   .nkey:active { background: var(--border); transform: scale(.94); }
   .nkey.del { color: var(--yellow); font-size: 16px; }
   .nkey.clr { color: var(--red); font-size: 11px; font-family: 'Outfit', sans-serif; font-weight: 700; }
-
-  /* ── PAYMENT TYPE ── */
   .ptypes { display: flex; gap: 7px; }
   .ptype {
     flex: 1; padding: 10px 4px; border: 1px solid var(--border);
@@ -126,8 +112,6 @@
   }
   .ptype .ico { font-size: 18px; }
   .ptype.on { border-color: var(--accent); color: var(--accent); background: rgba(0,180,216,.08); }
-
-  /* ── FIELDS ── */
   .field { margin-bottom: 10px; }
   .field:last-child { margin-bottom: 0; }
   .field label { display: block; font-size: 10px; color: var(--muted); font-weight: 600; margin-bottom: 5px; }
@@ -140,8 +124,6 @@
   .field input:focus, .field select:focus { border-color: var(--accent); }
   .field input::placeholder { color: var(--muted); }
   .field select option { background: var(--card); }
-
-  /* ── BUTTONS ── */
   .btn {
     width: 100%; padding: 15px; border: none; border-radius: 11px;
     font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 700;
@@ -157,8 +139,6 @@
   .btn-success { background: linear-gradient(135deg, #06d6a0, #028a60); color: #fff; }
   .btn-danger { background: linear-gradient(135deg, var(--red), #a4001a); color: #fff; }
   .btn-outline { background: transparent; border: 1px solid var(--accent); color: var(--accent); }
-
-  /* ── STATUS BOX ── */
   .sbox {
     border-radius: 12px; padding: 14px 14px;
     display: flex; align-items: flex-start; gap: 12px;
@@ -170,8 +150,6 @@
   .sico { font-size: 22px; flex-shrink: 0; }
   .stxt .stitle { font-size: 13px; font-weight: 700; }
   .stxt .ssub   { font-size: 11px; color: var(--muted); margin-top: 3px; line-height: 1.4; }
-
-  /* ── DEVICE ITEM ── */
   .devitem {
     display: flex; align-items: center; gap: 10px;
     padding: 11px 12px; border-radius: 10px; border: 1px solid var(--border);
@@ -184,8 +162,6 @@
   .devname { font-size: 13px; font-weight: 600; }
   .devid { font-size: 10px; color: var(--muted); font-family: 'JetBrains Mono', monospace; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .devcheck { color: var(--accent); font-size: 18px; }
-
-  /* ── HISTORY ── */
   .txrow {
     display: flex; align-items: center; gap: 10px;
     padding: 11px 0; border-bottom: 1px solid var(--border);
@@ -197,8 +173,6 @@
   .txval { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 700; }
   .txval.ok  { color: var(--green); }
   .txval.err { color: var(--red); }
-
-  /* ── LOG ── */
   .logbox {
     background: var(--bg); border-radius: 9px; padding: 10px;
     max-height: 220px; overflow-y: auto;
@@ -212,15 +186,11 @@
   .logm.err  { color: var(--red); }
   .logm.info { color: var(--accent); }
   .logm.warn { color: var(--yellow); }
-
-  /* ── SPINNER ── */
   .spin {
     width: 18px; height: 18px; border: 2px solid rgba(255,255,255,.2);
     border-top-color: #fff; border-radius: 50%; animation: rot .7s linear infinite;
   }
   @keyframes rot { to { transform: rotate(360deg); } }
-
-  /* ── TOAST ── */
   #toast {
     position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(30px);
     background: var(--card); border: 1px solid var(--border); border-radius: 12px;
@@ -229,17 +199,12 @@
     transition: all .3s;
   }
   #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-  /* ── HINT ── */
   .hint { font-size: 11px; color: var(--yellow); text-align: center; padding: 4px 0; }
-
-  /* ── INSTALLMENTS ── */
   #instrow { display: none; }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <div class="header">
   <div class="hlogo">MP</div>
   <div class="htitle">
@@ -249,7 +214,6 @@
   <div class="hled off" id="led"></div>
 </div>
 
-<!-- NAV -->
 <div class="nav">
   <button class="ntab on" onclick="goTab('cobrar',this)"><span class="ico">💳</span>Cobrar</button>
   <button class="ntab" onclick="goTab('config',this)"><span class="ico">⚙️</span>Config</button>
@@ -257,16 +221,12 @@
   <button class="ntab" onclick="goTab('logs',this)"><span class="ico">📡</span>Logs</button>
 </div>
 
-<!-- ══════ TAB COBRAR ══════ -->
 <div class="page on" id="tab-cobrar">
-
-  <!-- tela normal de cobrança -->
   <div id="charge-screen">
     <div class="amtbox">
       <div class="amtlabel">VALOR DA COBRANÇA</div>
       <div class="amtval" id="amtDisplay">R$ 0,00</div>
     </div>
-
     <div class="numpad">
       <button class="nkey" onclick="numPress('1')">1</button>
       <button class="nkey" onclick="numPress('2')">2</button>
@@ -281,7 +241,6 @@
       <button class="nkey" onclick="numPress('00')">00</button>
       <button class="nkey del" onclick="numBack()">⌫</button>
     </div>
-
     <div class="card">
       <div class="clabel">🏷️ Tipo de Pagamento</div>
       <div class="ptypes">
@@ -317,7 +276,6 @@
         <input type="text" id="desc" placeholder="Ex: Mesa 5, Pedido #42...">
       </div>
     </div>
-
     <div id="devinfo-box" style="display:none" class="sbox info">
       <span class="sico">📟</span>
       <div class="stxt">
@@ -325,21 +283,16 @@
         <div class="ssub" id="devinfo-id" style="font-family:monospace;font-size:10px"></div>
       </div>
     </div>
-
     <button class="btn btn-primary" id="btnCobrar" onclick="createPayment()">
       📲 Cobrar R$ 0,00
     </button>
     <div class="hint" id="hint-nodev" style="display:none">⚠️ Configure o token e selecione um dispositivo</div>
   </div>
-
-  <!-- tela de status do pagamento -->
   <div id="pay-screen" style="display:none">
     <div id="pay-status-content"></div>
   </div>
-
 </div>
 
-<!-- ══════ TAB CONFIG ══════ -->
 <div class="page" id="tab-config">
   <div class="card">
     <div class="clabel">🔑 Credenciais</div>
@@ -355,12 +308,10 @@
       🔍 Buscar Dispositivos
     </button>
   </div>
-
   <div class="card" id="devlist-card" style="display:none">
     <div class="clabel">📟 Dispositivos Point</div>
     <div id="devlist"></div>
   </div>
-
   <div class="card">
     <div class="clabel">📖 Como usar</div>
     <div style="font-size:12px;color:var(--muted);line-height:1.8">
@@ -370,12 +321,11 @@
       <b style="color:var(--accent)">4.</b> Vá em Cobrar, digite o valor e envie<br>
       <b style="color:var(--accent)">5.</b> O cliente paga na maquininha normalmente<br>
       <br>
-      <span style="color:var(--yellow)">⚠️ Salve este arquivo no celular e abra sempre pelo Chrome para evitar bloqueio de rede.</span>
+      <span style="color:var(--yellow)">⚠️ Proxy ativo: snowy-surf-840e.sptziner.workers.dev</span>
     </div>
   </div>
 </div>
 
-<!-- ══════ TAB HISTÓRICO ══════ -->
 <div class="page" id="tab-historico">
   <div class="card">
     <div class="clabel">📋 Cobranças</div>
@@ -387,7 +337,6 @@
   </div>
 </div>
 
-<!-- ══════ TAB LOGS ══════ -->
 <div class="page" id="tab-logs">
   <div class="card">
     <div class="clabel" style="justify-content:space-between">
@@ -403,6 +352,9 @@
 <div id="toast"></div>
 
 <script>
+// ── PROXY URL ──────────────────────────────────────────
+const PROXY = 'https://snowy-surf-840e.sptziner.workers.dev/proxy';
+
 // ── STATE ──────────────────────────────────────────────
 let amountCents = 0;
 let payType = 'credit';
@@ -470,7 +422,7 @@ async function apiFetch(method, path, body) {
     }
   };
   if (body) opts.body = JSON.stringify(body);
-  const r = await fetch('https://api.mercadopago.com' + path, opts);
+  const r = await fetch(PROXY + path, opts);
   const data = await r.json();
   if (!r.ok) throw new Error(data.message || data.error || 'HTTP ' + r.status);
   return data;
