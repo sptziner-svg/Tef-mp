@@ -498,10 +498,8 @@ async function createPayment() {
 
   const body = {
     amount: amountCents,
-    payment_method: {
-      installments: payType === 'credit' ? inst : 1,
-      type: payType === 'debit' ? 'debit_card' : 'credit_card'
-    },
+    type: payType === 'debit' ? 'debit_card' : 'credit_card',
+    installments: payType === 'credit' ? inst : 1,
     description: desc,
     additional_info: {
       external_reference: 'PDV-' + Date.now(),
