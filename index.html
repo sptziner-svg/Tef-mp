@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Point TEF</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<title>Pix Cobrador</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -12,57 +11,58 @@
     --surface: #0e1829;
     --card: #131f33;
     --border: #1e2d47;
-    --accent: #00b4d8;
-    --accent2: #0077b6;
+    --pix: #32BCAD;
+    --pix2: #1a8f82;
     --green: #06d6a0;
     --red: #ef233c;
     --yellow: #ffd166;
     --text: #cdd9ed;
     --muted: #4a6280;
-    --white: #ffffff;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
   html, body { height: 100%; background: var(--bg); font-family: 'Outfit', sans-serif; color: var(--text); overflow-x: hidden; }
+
   .header {
-    background: linear-gradient(135deg, #023e8a 0%, #0077b6 60%, #00b4d8 100%);
+    background: linear-gradient(135deg, #1a8f82 0%, #32BCAD 100%);
     padding: 14px 18px 12px;
     display: flex; align-items: center; gap: 12px;
-    box-shadow: 0 4px 24px rgba(0,180,216,.25);
+    box-shadow: 0 4px 24px rgba(50,188,173,.3);
     position: sticky; top: 0; z-index: 10;
   }
   .hlogo {
     width: 38px; height: 38px; background: #fff; border-radius: 10px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 15px; font-weight: 800; color: #0077b6; flex-shrink: 0;
+    flex-shrink: 0;
   }
+  .hlogo svg { width: 24px; height: 24px; }
   .htitle { flex: 1; }
   .htitle h1 { font-size: 16px; font-weight: 700; color: #fff; line-height: 1; }
   .htitle span { font-size: 11px; color: rgba(255,255,255,.7); font-weight: 300; }
   .hled {
     width: 10px; height: 10px; border-radius: 50%;
-    background: var(--green); box-shadow: 0 0 10px var(--green);
+    background: #fff; box-shadow: 0 0 10px #fff;
     animation: blink 2s infinite;
   }
   .hled.off { background: var(--red); box-shadow: 0 0 10px var(--red); animation: none; }
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.4} }
+
   .nav {
     display: flex; background: var(--surface);
     border-bottom: 1px solid var(--border);
-    overflow-x: auto; scrollbar-width: none;
   }
-  .nav::-webkit-scrollbar { display: none; }
   .ntab {
-    flex: 1; min-width: 70px; padding: 10px 6px 8px;
+    flex: 1; padding: 10px 6px 8px;
     border: none; background: transparent; color: var(--muted);
     font-family: 'Outfit', sans-serif; font-size: 10px; font-weight: 600;
     cursor: pointer; border-bottom: 2px solid transparent;
     transition: all .2s; display: flex; flex-direction: column; align-items: center; gap: 3px;
-    white-space: nowrap;
   }
   .ntab .ico { font-size: 17px; }
-  .ntab.on { color: var(--accent); border-bottom-color: var(--accent); }
+  .ntab.on { color: var(--pix); border-bottom-color: var(--pix); }
+
   .page { display: none; padding: 14px; flex-direction: column; gap: 12px; }
   .page.on { display: flex; }
+
   .card {
     background: var(--card); border: 1px solid var(--border);
     border-radius: 14px; padding: 15px;
@@ -72,11 +72,12 @@
     letter-spacing: 1px; text-transform: uppercase;
     margin-bottom: 12px; display: flex; align-items: center; gap: 6px;
   }
+
   .amtbox {
-    background: linear-gradient(135deg, #023e8a, #0077b6 70%, #00b4d8);
+    background: linear-gradient(135deg, #0d5c54, #1a8f82 60%, #32BCAD);
     border-radius: 14px; padding: 22px 16px 18px;
     text-align: center; position: relative; overflow: hidden;
-    border: 1px solid rgba(0,180,216,.2);
+    border: 1px solid rgba(50,188,173,.2);
   }
   .amtbox::before {
     content: ''; position: absolute; top: -30px; right: -30px;
@@ -86,10 +87,11 @@
   .amtlabel { font-size: 10px; color: rgba(255,255,255,.6); letter-spacing: 1.5px; margin-bottom: 8px; }
   .amtval {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 38px; font-weight: 600; color: rgba(255,255,255,.4);
+    font-size: 38px; font-weight: 600; color: rgba(255,255,255,.35);
     letter-spacing: -1px; transition: color .2s;
   }
-  .amtval.has { color: #fff; text-shadow: 0 0 30px rgba(6,214,160,.3); }
+  .amtval.has { color: #fff; text-shadow: 0 0 30px rgba(50,188,173,.4); }
+
   .numpad { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
   .nkey {
     background: var(--surface); border: 1px solid var(--border);
@@ -101,67 +103,65 @@
   }
   .nkey:active { background: var(--border); transform: scale(.94); }
   .nkey.del { color: var(--yellow); font-size: 16px; }
-  .nkey.clr { color: var(--red); font-size: 11px; font-family: 'Outfit', sans-serif; font-weight: 700; }
-  .ptypes { display: flex; gap: 7px; }
-  .ptype {
-    flex: 1; padding: 10px 4px; border: 1px solid var(--border);
-    border-radius: 10px; background: var(--surface); color: var(--muted);
-    font-family: 'Outfit', sans-serif; font-size: 10px; font-weight: 600;
-    cursor: pointer; transition: all .2s; text-align: center;
-    display: flex; flex-direction: column; align-items: center; gap: 4px;
-  }
-  .ptype .ico { font-size: 18px; }
-  .ptype.on { border-color: var(--accent); color: var(--accent); background: rgba(0,180,216,.08); }
+
   .field { margin-bottom: 10px; }
   .field:last-child { margin-bottom: 0; }
   .field label { display: block; font-size: 10px; color: var(--muted); font-weight: 600; margin-bottom: 5px; }
-  .field input, .field select {
+  .field input {
     width: 100%; background: var(--bg); border: 1px solid var(--border);
     border-radius: 8px; padding: 10px 12px; color: var(--text);
-    font-family: 'JetBrains Mono', monospace; font-size: 12px; outline: none;
-    transition: border-color .2s; -webkit-appearance: none;
+    font-family: 'Outfit', sans-serif; font-size: 13px; outline: none;
+    transition: border-color .2s;
   }
-  .field input:focus, .field select:focus { border-color: var(--accent); }
+  .field input:focus { border-color: var(--pix); }
   .field input::placeholder { color: var(--muted); }
-  .field select option { background: var(--card); }
+
   .btn {
     width: 100%; padding: 15px; border: none; border-radius: 11px;
     font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 700;
-    cursor: pointer; transition: all .2s; letter-spacing: .3px;
+    cursor: pointer; transition: all .2s;
     display: flex; align-items: center; justify-content: center; gap: 8px;
   }
-  .btn-primary {
-    background: linear-gradient(135deg, var(--accent2), var(--accent));
-    color: #fff; box-shadow: 0 4px 20px rgba(0,180,216,.25);
+  .btn-pix {
+    background: linear-gradient(135deg, var(--pix2), var(--pix));
+    color: #fff; box-shadow: 0 4px 20px rgba(50,188,173,.3);
   }
-  .btn-primary:active { transform: scale(.98); }
-  .btn-primary:disabled { opacity: .35; cursor: not-allowed; transform: none; }
+  .btn-pix:active { transform: scale(.98); }
+  .btn-pix:disabled { opacity: .35; cursor: not-allowed; transform: none; }
   .btn-success { background: linear-gradient(135deg, #06d6a0, #028a60); color: #fff; }
   .btn-danger { background: linear-gradient(135deg, var(--red), #a4001a); color: #fff; }
-  .btn-outline { background: transparent; border: 1px solid var(--accent); color: var(--accent); }
+
   .sbox {
-    border-radius: 12px; padding: 14px 14px;
+    border-radius: 12px; padding: 14px;
     display: flex; align-items: flex-start; gap: 12px;
   }
   .sbox.wait { background: rgba(255,209,102,.07); border: 1px solid rgba(255,209,102,.25); }
   .sbox.ok   { background: rgba(6,214,160,.07);  border: 1px solid rgba(6,214,160,.3); }
   .sbox.err  { background: rgba(239,35,60,.07);  border: 1px solid rgba(239,35,60,.3); }
-  .sbox.info { background: rgba(0,180,216,.07);  border: 1px solid rgba(0,180,216,.25); }
+  .sbox.info { background: rgba(50,188,173,.07); border: 1px solid rgba(50,188,173,.25); }
   .sico { font-size: 22px; flex-shrink: 0; }
   .stxt .stitle { font-size: 13px; font-weight: 700; }
-  .stxt .ssub   { font-size: 11px; color: var(--muted); margin-top: 3px; line-height: 1.4; }
-  .devitem {
-    display: flex; align-items: center; gap: 10px;
-    padding: 11px 12px; border-radius: 10px; border: 1px solid var(--border);
-    cursor: pointer; transition: all .2s; margin-bottom: 8px; background: var(--surface);
+  .stxt .ssub   { font-size: 11px; color: var(--muted); margin-top: 3px; line-height: 1.5; }
+
+  /* QR Code */
+  .qrwrap {
+    background: #fff; border-radius: 14px;
+    padding: 16px; display: flex; align-items: center; justify-content: center;
+    margin: 4px 0;
   }
-  .devitem:last-child { margin-bottom: 0; }
-  .devitem.on { border-color: var(--accent); background: rgba(0,180,216,.07); }
-  .devico { font-size: 22px; }
-  .devinfo { flex: 1; overflow: hidden; }
-  .devname { font-size: 13px; font-weight: 600; }
-  .devid { font-size: 10px; color: var(--muted); font-family: 'JetBrains Mono', monospace; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .devcheck { color: var(--accent); font-size: 18px; }
+  .qrwrap canvas { display: block; }
+
+  /* copy pix key */
+  .pixcopy {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 9px; padding: 10px 12px;
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    color: var(--muted); word-break: break-all; line-height: 1.5;
+    cursor: pointer; transition: border-color .2s;
+  }
+  .pixcopy:active { border-color: var(--pix); }
+
+  /* history */
   .txrow {
     display: flex; align-items: center; gap: 10px;
     padding: 11px 0; border-bottom: 1px solid var(--border);
@@ -173,9 +173,12 @@
   .txval { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 700; }
   .txval.ok  { color: var(--green); }
   .txval.err { color: var(--red); }
+  .txval.pend { color: var(--yellow); }
+
+  /* log */
   .logbox {
     background: var(--bg); border-radius: 9px; padding: 10px;
-    max-height: 220px; overflow-y: auto;
+    max-height: 260px; overflow-y: auto;
     font-family: 'JetBrains Mono', monospace; font-size: 10px;
     border: 1px solid var(--border);
   }
@@ -184,13 +187,15 @@
   .logt { color: var(--muted); margin-right: 5px; }
   .logm.ok   { color: var(--green); }
   .logm.err  { color: var(--red); }
-  .logm.info { color: var(--accent); }
+  .logm.info { color: var(--pix); }
   .logm.warn { color: var(--yellow); }
+
   .spin {
     width: 18px; height: 18px; border: 2px solid rgba(255,255,255,.2);
     border-top-color: #fff; border-radius: 50%; animation: rot .7s linear infinite;
   }
   @keyframes rot { to { transform: rotate(360deg); } }
+
   #toast {
     position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(30px);
     background: var(--card); border: 1px solid var(--border); border-radius: 12px;
@@ -199,34 +204,56 @@
     transition: all .3s;
   }
   #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-  .hint { font-size: 11px; color: var(--yellow); text-align: center; padding: 4px 0; }
-  #instrow { display: none; }
+
+  .badge {
+    display: inline-block; padding: 2px 8px; border-radius: 20px;
+    font-size: 10px; font-weight: 700;
+  }
+  .badge.ok   { background: rgba(6,214,160,.15); color: var(--green); }
+  .badge.pend { background: rgba(255,209,102,.15); color: var(--yellow); }
+  .badge.err  { background: rgba(239,35,60,.15); color: var(--red); }
+
+  .timer-bar {
+    height: 3px; background: var(--border); border-radius: 3px; overflow: hidden; margin-top: 8px;
+  }
+  .timer-fill {
+    height: 100%; background: var(--pix); border-radius: 3px;
+    transition: width 1s linear;
+  }
 </style>
 </head>
 <body>
 
 <div class="header">
-  <div class="hlogo">MP</div>
+  <div class="hlogo">
+    <svg viewBox="0 0 24 24" fill="none">
+      <path d="M9.5 4.5L4.5 9.5L9.5 14.5" stroke="#32BCAD" stroke-width="2" stroke-linecap="round"/>
+      <path d="M14.5 4.5L19.5 9.5L14.5 14.5" stroke="#32BCAD" stroke-width="2" stroke-linecap="round"/>
+      <path d="M7 19.5H17" stroke="#32BCAD" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </div>
   <div class="htitle">
-    <h1>Point TEF</h1>
-    <span>Mercado Pago Integration</span>
+    <h1>Pix Cobrador</h1>
+    <span>Mercado Pago • Pix</span>
   </div>
   <div class="hled off" id="led"></div>
 </div>
 
 <div class="nav">
-  <button class="ntab on" onclick="goTab('cobrar',this)"><span class="ico">💳</span>Cobrar</button>
+  <button class="ntab on" onclick="goTab('cobrar',this)"><span class="ico">⚡</span>Cobrar</button>
   <button class="ntab" onclick="goTab('config',this)"><span class="ico">⚙️</span>Config</button>
   <button class="ntab" onclick="goTab('historico',this)"><span class="ico">📋</span>Histórico</button>
   <button class="ntab" onclick="goTab('logs',this)"><span class="ico">📡</span>Logs</button>
 </div>
 
+<!-- COBRAR -->
 <div class="page on" id="tab-cobrar">
   <div id="charge-screen">
     <div class="amtbox">
-      <div class="amtlabel">VALOR DA COBRANÇA</div>
+      <div class="amtlabel">VALOR DA COBRANÇA PIX</div>
       <div class="amtval" id="amtDisplay">R$ 0,00</div>
     </div>
+
     <div class="numpad">
       <button class="nkey" onclick="numPress('1')">1</button>
       <button class="nkey" onclick="numPress('2')">2</button>
@@ -241,58 +268,25 @@
       <button class="nkey" onclick="numPress('00')">00</button>
       <button class="nkey del" onclick="numBack()">⌫</button>
     </div>
+
     <div class="card">
-      <div class="clabel">🏷️ Tipo de Pagamento</div>
-      <div class="ptypes">
-        <button class="ptype on" id="pt-credit" onclick="setPayType('credit',this)">
-          <span class="ico">💳</span>Crédito
-        </button>
-        <button class="ptype" id="pt-debit" onclick="setPayType('debit',this)">
-          <span class="ico">🏦</span>Débito
-        </button>
-        <button class="ptype" id="pt-nfc" onclick="setPayType('credit_card',this)">
-          <span class="ico">📶</span>Aproximar
-        </button>
-      </div>
-      <div id="instrow" class="field" style="margin-top:12px">
-        <label>Parcelas</label>
-        <select id="installments">
-          <option value="1">1x (à vista)</option>
-          <option value="2">2x</option>
-          <option value="3">3x</option>
-          <option value="4">4x</option>
-          <option value="5">5x</option>
-          <option value="6">6x</option>
-          <option value="7">7x</option>
-          <option value="8">8x</option>
-          <option value="9">9x</option>
-          <option value="10">10x</option>
-          <option value="11">11x</option>
-          <option value="12">12x</option>
-        </select>
-      </div>
-      <div class="field" style="margin-top:12px">
+      <div class="field">
         <label>Descrição (opcional)</label>
         <input type="text" id="desc" placeholder="Ex: Mesa 5, Pedido #42...">
       </div>
     </div>
-    <div id="devinfo-box" style="display:none" class="sbox info">
-      <span class="sico">📟</span>
-      <div class="stxt">
-        <div class="stitle">Dispositivo selecionado</div>
-        <div class="ssub" id="devinfo-id" style="font-family:monospace;font-size:10px"></div>
-      </div>
-    </div>
-    <button class="btn btn-primary" id="btnCobrar" onclick="createPayment()">
-      📲 Cobrar R$ 0,00
+
+    <button class="btn btn-pix" id="btnCobrar" onclick="createPix()" disabled>
+      ⚡ Gerar QR Code Pix
     </button>
-    <div class="hint" id="hint-nodev" style="display:none">⚠️ Configure o token e selecione um dispositivo</div>
   </div>
+
   <div id="pay-screen" style="display:none">
-    <div id="pay-status-content"></div>
+    <div id="pay-content"></div>
   </div>
 </div>
 
+<!-- CONFIG -->
 <div class="page" id="tab-config">
   <div class="card">
     <div class="clabel">🔑 Credenciais</div>
@@ -300,84 +294,80 @@
       <label>Access Token</label>
       <input type="password" id="tokenInput" placeholder="APP_USR-... ou TEST-..." oninput="onTokenChange()">
     </div>
-    <div style="font-size:10px;color:var(--muted);margin-bottom:12px;line-height:1.5">
-      Obtenha em <strong style="color:var(--accent)">mercadopago.com.br/developers</strong><br>
+    <div style="font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:14px">
+      Obtenha em <strong style="color:var(--pix)">mercadopago.com.br/developers</strong><br>
       Suas Integrações → Credenciais de Produção
     </div>
-    <button class="btn btn-primary" id="btnBuscar" onclick="fetchDevices()">
-      🔍 Buscar Dispositivos
-    </button>
+    <button class="btn btn-pix" onclick="saveToken()">💾 Salvar Token</button>
   </div>
-  <div class="card" id="devlist-card" style="display:none">
-    <div class="clabel">📟 Dispositivos Point</div>
-    <div id="devlist"></div>
-  </div>
+
   <div class="card">
-    <div class="clabel">📖 Como usar</div>
-    <div style="font-size:12px;color:var(--muted);line-height:1.8">
-      <b style="color:var(--accent)">1.</b> Cole seu Access Token acima<br>
-      <b style="color:var(--accent)">2.</b> Clique em "Buscar Dispositivos"<br>
-      <b style="color:var(--accent)">3.</b> Selecione sua Point na lista<br>
-      <b style="color:var(--accent)">4.</b> Vá em Cobrar, digite o valor e envie<br>
-      <b style="color:var(--accent)">5.</b> O cliente paga na maquininha normalmente<br>
+    <div class="clabel">ℹ️ Como funciona</div>
+    <div style="font-size:12px;color:var(--muted);line-height:1.9">
+      <b style="color:var(--pix)">1.</b> Cole seu Access Token e salve<br>
+      <b style="color:var(--pix)">2.</b> Digite o valor na aba Cobrar<br>
+      <b style="color:var(--pix)">3.</b> Toque em "Gerar QR Code Pix"<br>
+      <b style="color:var(--pix)">4.</b> Mostre o QR Code pro cliente escanear<br>
+      <b style="color:var(--pix)">5.</b> O app confirma o pagamento automaticamente<br>
       <br>
-      <span style="color:var(--yellow)">⚠️ Proxy ativo: snowy-surf-840e.sptziner.workers.dev</span>
+      <span style="color:var(--yellow)">⚡ Pix cai na hora, sem precisar de maquininha!</span>
     </div>
   </div>
 </div>
 
+<!-- HISTÓRICO -->
 <div class="page" id="tab-historico">
   <div class="card">
-    <div class="clabel">📋 Cobranças</div>
+    <div class="clabel" style="justify-content:space-between">
+      <span>📋 Cobranças</span>
+      <button onclick="clearHistory()" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:11px;font-family:'Outfit',sans-serif">Limpar</button>
+    </div>
     <div id="history-list">
-      <div style="text-align:center;color:var(--muted);font-size:13px;padding:24px 0">
-        Nenhuma cobrança ainda
-      </div>
+      <div style="text-align:center;color:var(--muted);font-size:13px;padding:24px 0">Nenhuma cobrança ainda</div>
     </div>
   </div>
 </div>
 
+<!-- LOGS -->
 <div class="page" id="tab-logs">
   <div class="card">
     <div class="clabel" style="justify-content:space-between">
-      <span>📡 Log de Requisições</span>
+      <span>📡 Log</span>
       <button onclick="clearLogs()" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:11px;font-family:'Outfit',sans-serif">Limpar</button>
     </div>
-    <div class="logbox" id="logbox">
-      <div style="color:var(--muted)">Aguardando ações...</div>
-    </div>
+    <div class="logbox" id="logbox"><div style="color:var(--muted)">Aguardando...</div></div>
   </div>
 </div>
 
 <div id="toast"></div>
 
+<!-- QR Code lib -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
 <script>
-// ── PROXY URL ──────────────────────────────────────────
 const PROXY = 'https://snowy-surf-840e.sptziner.workers.dev/proxy';
 
-// ── STATE ──────────────────────────────────────────────
 let amountCents = 0;
-let payType = 'credit';
-let selectedDevice = null;
-let devices = [];
 let pollTimer = null;
-let history = [];
-let logs = [];
-let currentIntentId = null;
+let currentPaymentId = null;
 let currentAmount = 0;
+let timerSecs = 0;
+let timerInterval = null;
+let history = JSON.parse(localStorage.getItem('pix_history') || '[]');
+let logs = [];
 
-// ── TABS ───────────────────────────────────────────────
+// ── TABS ──
 function goTab(id, btn) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('on'));
   document.querySelectorAll('.ntab').forEach(b => b.classList.remove('on'));
   document.getElementById('tab-' + id).classList.add('on');
   btn.classList.add('on');
+  if (id === 'historico') renderHistory();
 }
 
-// ── NUMPAD ─────────────────────────────────────────────
+// ── NUMPAD ──
 function numPress(v) {
-  const s = String(amountCents) + v;
-  const n = parseInt(s, 10);
+  const n = parseInt(String(amountCents) + v, 10);
   if (n <= 9999999) amountCents = n;
   updateAmt();
 }
@@ -392,271 +382,281 @@ function updateAmt() {
   el.textContent = fmt;
   el.className = 'amtval' + (amountCents > 0 ? ' has' : '');
   const btn = document.getElementById('btnCobrar');
-  btn.textContent = '📲 Cobrar ' + fmt;
-  btn.disabled = amountCents < 100 || !selectedDevice;
+  btn.disabled = amountCents < 100 || !getToken();
+  btn.textContent = amountCents >= 100 ? '⚡ Gerar Pix de ' + fmt : '⚡ Gerar QR Code Pix';
 }
 
-// ── PAY TYPE ───────────────────────────────────────────
-function setPayType(type, btn) {
-  payType = type;
-  document.querySelectorAll('.ptype').forEach(b => b.classList.remove('on'));
-  btn.classList.add('on');
-  document.getElementById('instrow').style.display = type === 'credit' ? 'block' : 'none';
-}
-
-// ── TOKEN ──────────────────────────────────────────────
+// ── TOKEN ──
 function onTokenChange() {
   const t = document.getElementById('tokenInput').value.trim();
   document.getElementById('led').className = 'hled' + (t ? '' : ' off');
+  updateAmt();
 }
-function getToken() { return document.getElementById('tokenInput').value.trim(); }
+function saveToken() {
+  const t = document.getElementById('tokenInput').value.trim();
+  if (!t) { toast('⚠️ Cole o token primeiro'); return; }
+  localStorage.setItem('pix_token', t);
+  document.getElementById('led').className = 'hled';
+  toast('✅ Token salvo!');
+  updateAmt();
+}
+function getToken() {
+  return document.getElementById('tokenInput').value.trim() || localStorage.getItem('pix_token') || '';
+}
 
-// ── API ────────────────────────────────────────────────
+// ── API ──
 async function apiFetch(method, path, body) {
-  const token = getToken();
   const opts = {
     method,
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + token
-    }
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + getToken() }
   };
   if (body) opts.body = JSON.stringify(body);
   const r = await fetch(PROXY + path, opts);
   const data = await r.json();
-  if (!r.ok) throw new Error(data.message || data.error || 'HTTP ' + r.status);
+  if (!r.ok) throw new Error(data.message || data.error || JSON.stringify(data));
   return data;
 }
 
-// ── FETCH DEVICES ──────────────────────────────────────
-async function fetchDevices() {
-  if (!getToken()) { toast('⚠️ Informe o Access Token'); return; }
-  const btn = document.getElementById('btnBuscar');
-  btn.disabled = true;
-  btn.innerHTML = '<div class="spin"></div> Buscando...';
-  addLog('Buscando dispositivos...', 'info');
-  try {
-    const data = await apiFetch('GET', '/point/integration-api/devices?offset=0&limit=50');
-    devices = data.devices || [];
-    addLog(devices.length + ' dispositivo(s) encontrado(s)', 'ok');
-    renderDevices();
-    toast('✅ ' + devices.length + ' dispositivo(s) encontrado(s)');
-    document.getElementById('devlist-card').style.display = devices.length ? 'block' : 'none';
-  } catch(e) {
-    addLog('Erro: ' + e.message, 'err');
-    toast('❌ ' + e.message);
-  }
-  btn.disabled = false;
-  btn.innerHTML = '🔍 Buscar Dispositivos';
-}
-
-function renderDevices() {
-  const list = document.getElementById('devlist');
-  if (!devices.length) { list.innerHTML = '<div style="color:var(--muted);font-size:13px">Nenhum dispositivo encontrado</div>'; return; }
-  list.innerHTML = devices.map(d => `
-    <div class="devitem ${selectedDevice === d.id ? 'on' : ''}" onclick="selectDevice('${d.id}')">
-      <span class="devico">🖥️</span>
-      <div class="devinfo">
-        <div class="devname">${d.id.split('__')[0]}</div>
-        <div class="devid">${d.id}</div>
-        ${d.store_id ? `<div class="devid">Loja: ${d.store_id}</div>` : ''}
-      </div>
-      ${selectedDevice === d.id ? '<span class="devcheck">✓</span>' : ''}
-    </div>
-  `).join('');
-}
-
-async function selectDevice(id) {
-  selectedDevice = id;
-  renderDevices();
-  updateAmt();
-  document.getElementById('devinfo-box').style.display = 'flex';
-  document.getElementById('devinfo-id').textContent = id;
-  document.getElementById('hint-nodev').style.display = 'none';
-  addLog('Ativando modo PDV para ' + id, 'info');
-  try {
-    await apiFetch('PATCH', '/point/integration-api/devices/' + id, { operating_mode: 'PDV' });
-    addLog('Modo PDV ativado', 'ok');
-    toast('📟 Dispositivo selecionado!');
-  } catch(e) {
-    addLog('Aviso PDV: ' + e.message, 'warn');
-  }
-}
-
-// ── CREATE PAYMENT ─────────────────────────────────────
-async function createPayment() {
+// ── CRIAR PIX ──
+async function createPix() {
   if (!getToken()) { toast('⚠️ Configure o token'); return; }
-  if (!selectedDevice) { toast('⚠️ Selecione um dispositivo'); return; }
   if (amountCents < 100) { toast('⚠️ Valor mínimo R$ 1,00'); return; }
 
-  const inst = parseInt(document.getElementById('installments').value, 10) || 1;
-  const desc = document.getElementById('desc').value || 'Venda PDV';
   currentAmount = amountCents;
+  const desc = document.getElementById('desc').value || 'Cobrança Pix';
 
-  showPayScreen('creating');
-  addLog('Criando cobrança de ' + fmtBRL(amountCents) + '...', 'info');
+  showScreen('loading');
+  addLog('Gerando cobrança Pix de ' + fmtBRL(amountCents) + '...', 'info');
 
   const body = {
-    amount: amountCents,
+    transaction_amount: amountCents / 100,
     description: desc,
-    additional_info: {
-      external_reference: 'PDV-' + Date.now(),
-      print_on_terminal: true
+    payment_method_id: 'pix',
+    payer: {
+      email: 'cliente@email.com',
+      first_name: 'Cliente',
+      last_name: 'Pix',
+      identification: { type: 'CPF', number: '00000000000' }
     }
   };
 
   try {
-    const data = await apiFetch('POST',
-      '/point/integration-api/devices/' + selectedDevice + '/payment-intents', body);
-    currentIntentId = data.id;
-    addLog('Intenção criada: ' + data.id, 'ok');
-    showPayScreen('waiting');
+    const data = await apiFetch('POST', '/v1/payments', body);
+    currentPaymentId = data.id;
+    const qr = data.point_of_interaction?.transaction_data?.qr_code;
+    const qrBase64 = data.point_of_interaction?.transaction_data?.qr_code_base64;
+
+    addLog('Pix criado! ID: ' + data.id, 'ok');
+    addHistory(data.id, currentAmount, 'pend', desc);
+    showScreen('qr', { qr, qrBase64, id: data.id });
     startPolling(data.id);
-    toast('📲 Aguardando pagamento...');
+    timerSecs = 600; // 10 min
+    startTimer();
+    toast('✅ QR Code gerado!');
   } catch(e) {
     addLog('Erro: ' + e.message, 'err');
-    showPayScreen('error', e.message);
+    showScreen('error', { msg: e.message });
     toast('❌ ' + e.message);
   }
 }
 
-// ── POLLING ────────────────────────────────────────────
-function startPolling(intentId) {
-  let tries = 0;
-  pollTimer = setInterval(async () => {
-    tries++;
-    try {
-      const data = await apiFetch('GET', '/point/integration-api/payment-intents/' + intentId);
-      const s = (data.state && data.state.group) || data.status || '';
-      addLog('Status: ' + s, 'info');
-
-      if (s === 'PROCESSED' || s === 'approved') {
-        clearInterval(pollTimer);
-        addLog('✅ Aprovado! ID: ' + (data.payment && data.payment.id), 'ok');
-        addHistory(intentId, currentAmount, 'ok', data.payment && data.payment.id);
-        showPayScreen('success', null, data.payment && data.payment.id);
-        toast('✅ Pagamento aprovado!');
-      } else if (['CANCELED','cancelled','rejected','FAILED'].includes(s)) {
-        clearInterval(pollTimer);
-        addLog('Pagamento cancelado/recusado', 'err');
-        addHistory(intentId, currentAmount, 'err');
-        showPayScreen('error', 'Cancelado ou recusado');
-      } else if (tries >= 60) {
-        clearInterval(pollTimer);
-        addLog('Timeout', 'warn');
-        showPayScreen('timeout');
-      }
-    } catch(e) {
-      addLog('Polling: ' + e.message, 'warn');
-    }
-  }, 3000);
-}
-
-// ── CANCEL ─────────────────────────────────────────────
-async function cancelIntent() {
-  if (pollTimer) clearInterval(pollTimer);
-  if (currentIntentId) {
-    try {
-      await apiFetch('DELETE', '/point/integration-api/payment-intents/' + currentIntentId);
-      addLog('Intenção cancelada', 'warn');
-    } catch(e) { addLog('Erro ao cancelar: ' + e.message, 'err'); }
-  }
-  resetCharge();
-}
-function resetCharge() {
-  if (pollTimer) clearInterval(pollTimer);
-  currentIntentId = null;
-  document.getElementById('charge-screen').style.display = 'block';
-  document.getElementById('pay-screen').style.display = 'none';
-  amountCents = 0;
-  updateAmt();
-  document.getElementById('desc').value = '';
-}
-
-// ── PAY SCREEN ─────────────────────────────────────────
-function showPayScreen(state, msg, payId) {
+// ── TELAS ──
+function showScreen(state, data) {
   document.getElementById('charge-screen').style.display = 'none';
   document.getElementById('pay-screen').style.display = 'block';
-  const c = document.getElementById('pay-status-content');
-  const amt = fmtBRL(currentAmount);
+  const c = document.getElementById('pay-content');
 
-  if (state === 'creating') {
+  if (state === 'loading') {
     c.innerHTML = `
       <div class="sbox info">
         <div class="spin"></div>
-        <div class="stxt"><div class="stitle">Criando cobrança...</div><div class="ssub">Aguarde</div></div>
+        <div class="stxt"><div class="stitle">Gerando QR Code...</div><div class="ssub">Conectando ao Mercado Pago</div></div>
       </div>`;
-  } else if (state === 'waiting') {
+
+  } else if (state === 'qr') {
+    const amt = fmtBRL(currentAmount);
     c.innerHTML = `
-      <div class="amtbox" style="margin-bottom:12px">
-        <div class="amtlabel">AGUARDANDO PAGAMENTO</div>
-        <div class="amtval has">${amt}</div>
-      </div>
-      <div class="sbox wait" style="margin-bottom:12px">
-        <span class="sico">⏳</span>
+      <div class="sbox info" style="margin-bottom:12px">
+        <span class="sico">⚡</span>
         <div class="stxt">
-          <div class="stitle">Maquininha aguardando</div>
-          <div class="ssub">Peça ao cliente para inserir ou aproximar o cartão</div>
+          <div class="stitle">${amt} • Aguardando pagamento</div>
+          <div class="ssub">Mostre o QR Code abaixo para o cliente escanear</div>
+          <div class="timer-bar"><div class="timer-fill" id="timerFill" style="width:100%"></div></div>
         </div>
       </div>
-      <div style="font-size:10px;color:var(--muted);font-family:monospace;word-break:break-all;margin-bottom:12px">ID: ${currentIntentId}</div>
-      <button class="btn btn-danger" onclick="cancelIntent()">❌ Cancelar cobrança</button>`;
+      <div class="qrwrap" id="qrwrap"></div>
+      <div style="font-size:11px;color:var(--muted);text-align:center;margin:6px 0">ou copie o código Pix Copia e Cola</div>
+      <div class="pixcopy" id="pixkey" onclick="copyPix()">${data.qr || 'Carregando...'}</div>
+      <div style="font-size:10px;color:var(--muted);text-align:center;margin:4px 0">Toque para copiar • ID: ${data.id}</div>
+      <button class="btn btn-danger" style="margin-top:8px" onclick="cancelPix()">❌ Cancelar</button>`;
+
+    // Gera QR Code
+    setTimeout(() => {
+      if (data.qrBase64) {
+        document.getElementById('qrwrap').innerHTML =
+          `<img src="data:image/png;base64,${data.qrBase64}" style="width:220px;height:220px;display:block">`;
+      } else if (data.qr) {
+        try {
+          new QRCode(document.getElementById('qrwrap'), {
+            text: data.qr, width: 220, height: 220,
+            colorDark: '#000', colorLight: '#fff', correctLevel: QRCode.CorrectLevel.M
+          });
+        } catch(e) { document.getElementById('qrwrap').innerHTML = '<div style="color:#999;font-size:11px">Use o código Pix abaixo</div>'; }
+      }
+    }, 100);
+
   } else if (state === 'success') {
     c.innerHTML = `
       <div class="sbox ok" style="margin-bottom:12px">
         <span class="sico">✅</span>
         <div class="stxt">
-          <div class="stitle">Pagamento aprovado!</div>
-          <div class="ssub">${amt}${payId ? ' • ID: ' + payId : ''}</div>
+          <div class="stitle">Pix recebido!</div>
+          <div class="ssub">${fmtBRL(currentAmount)} • ID: ${data.id}</div>
         </div>
       </div>
-      <button class="btn btn-success" onclick="resetCharge()">🔄 Nova cobrança</button>`;
+      <button class="btn btn-pix" onclick="resetCharge()">⚡ Nova cobrança</button>`;
+
   } else if (state === 'error') {
     c.innerHTML = `
       <div class="sbox err" style="margin-bottom:12px">
         <span class="sico">❌</span>
         <div class="stxt">
-          <div class="stitle">Pagamento recusado</div>
-          <div class="ssub">${msg || 'Verifique a maquininha'}</div>
+          <div class="stitle">Erro ao gerar Pix</div>
+          <div class="ssub">${data.msg}</div>
         </div>
       </div>
-      <button class="btn btn-primary" onclick="resetCharge()">🔄 Tentar novamente</button>`;
+      <button class="btn btn-pix" onclick="resetCharge()">🔄 Tentar novamente</button>`;
+
   } else if (state === 'timeout') {
     c.innerHTML = `
       <div class="sbox err" style="margin-bottom:12px">
         <span class="sico">⏰</span>
         <div class="stxt">
-          <div class="stitle">Tempo esgotado</div>
-          <div class="ssub">O cliente não completou o pagamento</div>
+          <div class="stitle">QR Code expirado</div>
+          <div class="ssub">O cliente não pagou a tempo</div>
         </div>
       </div>
-      <button class="btn btn-primary" onclick="resetCharge()">🔄 Tentar novamente</button>`;
+      <button class="btn btn-pix" onclick="resetCharge()">🔄 Gerar novo</button>`;
   }
 }
 
-// ── HISTORY ────────────────────────────────────────────
-function addHistory(intentId, amount, status, payId) {
-  history.unshift({ intentId, amount, status, payId, time: nowStr() });
-  renderHistory();
+// ── TIMER ──
+function startTimer() {
+  if (timerInterval) clearInterval(timerInterval);
+  const total = timerSecs;
+  timerInterval = setInterval(() => {
+    timerSecs--;
+    const fill = document.getElementById('timerFill');
+    if (fill) fill.style.width = ((timerSecs / total) * 100) + '%';
+    if (timerSecs <= 0) {
+      clearInterval(timerInterval);
+      if (pollTimer) clearInterval(pollTimer);
+      updateHistory(currentPaymentId, 'err');
+      showScreen('timeout');
+    }
+  }, 1000);
 }
+
+// ── POLLING ──
+function startPolling(payId) {
+  let tries = 0;
+  pollTimer = setInterval(async () => {
+    tries++;
+    try {
+      const data = await apiFetch('GET', '/v1/payments/' + payId);
+      const s = data.status;
+      addLog('Status: ' + s, 'info');
+
+      if (s === 'approved') {
+        clearInterval(pollTimer);
+        clearInterval(timerInterval);
+        addLog('✅ Pix aprovado! ID: ' + payId, 'ok');
+        updateHistory(payId, 'ok');
+        showScreen('success', { id: payId });
+        toast('💰 Pix recebido!');
+      } else if (['cancelled','rejected','refunded','charged_back'].includes(s)) {
+        clearInterval(pollTimer);
+        clearInterval(timerInterval);
+        addLog('Pix cancelado/expirado', 'warn');
+        updateHistory(payId, 'err');
+        showScreen('timeout');
+      } else if (tries >= 120) {
+        clearInterval(pollTimer);
+        clearInterval(timerInterval);
+        updateHistory(payId, 'err');
+        showScreen('timeout');
+      }
+    } catch(e) {
+      addLog('Polling: ' + e.message, 'warn');
+    }
+  }, 5000);
+}
+
+// ── CANCEL ──
+async function cancelPix() {
+  if (pollTimer) clearInterval(pollTimer);
+  if (timerInterval) clearInterval(timerInterval);
+  if (currentPaymentId) {
+    try {
+      await apiFetch('PUT', '/v1/payments/' + currentPaymentId, { status: 'cancelled' });
+      addLog('Pix cancelado', 'warn');
+    } catch(e) { addLog('Aviso cancel: ' + e.message, 'warn'); }
+    updateHistory(currentPaymentId, 'err');
+  }
+  resetCharge();
+}
+
+function resetCharge() {
+  if (pollTimer) clearInterval(pollTimer);
+  if (timerInterval) clearInterval(timerInterval);
+  currentPaymentId = null;
+  document.getElementById('charge-screen').style.display = 'block';
+  document.getElementById('pay-screen').style.display = 'none';
+  amountCents = 0;
+  document.getElementById('desc').value = '';
+  updateAmt();
+}
+
+// ── COPY PIX ──
+function copyPix() {
+  const txt = document.getElementById('pixkey').textContent;
+  navigator.clipboard.writeText(txt).then(() => toast('📋 Código copiado!')).catch(() => toast('⚠️ Copie manualmente'));
+}
+
+// ── HISTORY ──
+function addHistory(id, amount, status, desc) {
+  history.unshift({ id, amount, status, desc, time: nowStr() });
+  if (history.length > 50) history.pop();
+  saveHistory();
+}
+function updateHistory(id, status) {
+  const h = history.find(x => String(x.id) === String(id));
+  if (h) { h.status = status; saveHistory(); }
+}
+function saveHistory() { localStorage.setItem('pix_history', JSON.stringify(history)); }
+function clearHistory() { history = []; saveHistory(); renderHistory(); }
 function renderHistory() {
   const el = document.getElementById('history-list');
-  if (!history.length) { el.innerHTML = '<div style="text-align:center;color:var(--muted);font-size:13px;padding:24px 0">Nenhuma cobrança ainda</div>'; return; }
+  if (!history.length) {
+    el.innerHTML = '<div style="text-align:center;color:var(--muted);font-size:13px;padding:24px 0">Nenhuma cobrança ainda</div>';
+    return;
+  }
+  const badge = { ok: 'Pago', pend: 'Pendente', err: 'Expirado' };
   el.innerHTML = history.map(h => `
     <div class="txrow">
-      <span style="font-size:20px">${h.status === 'ok' ? '✅' : '❌'}</span>
+      <span style="font-size:20px">${h.status === 'ok' ? '✅' : h.status === 'pend' ? '⏳' : '❌'}</span>
       <div class="txleft">
-        <div class="txdesc">${h.status === 'ok' ? 'Aprovado' : 'Recusado'}</div>
-        <div class="txmeta">${h.time}${h.payId ? ' • #' + h.payId : ''}</div>
+        <div class="txdesc">${h.desc || 'Cobrança Pix'}</div>
+        <div class="txmeta">${h.time} • <span class="badge ${h.status}">${badge[h.status]||h.status}</span></div>
       </div>
-      <div class="txval ${h.status}">${fmtBRL(h.amount)}</div>
+      <div class="txval ${h.status === 'pend' ? 'pend' : h.status}">${fmtBRL(h.amount)}</div>
     </div>`).join('');
 }
 
-// ── LOGS ───────────────────────────────────────────────
+// ── LOGS ──
 function addLog(msg, type) {
   logs.unshift({ time: nowStr(), msg, type: type || 'info' });
-  if (logs.length > 60) logs.pop();
+  if (logs.length > 80) logs.pop();
   renderLogs();
 }
 function renderLogs() {
@@ -668,7 +668,7 @@ function renderLogs() {
 }
 function clearLogs() { logs = []; renderLogs(); }
 
-// ── UTILS ──────────────────────────────────────────────
+// ── UTILS ──
 function fmtBRL(cents) {
   return (cents / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 }
@@ -682,9 +682,14 @@ function toast(msg) {
   setTimeout(() => el.classList.remove('show'), 3000);
 }
 
-// ── INIT ───────────────────────────────────────────────
+// ── INIT ──
+const saved = localStorage.getItem('pix_token');
+if (saved) {
+  document.getElementById('tokenInput').value = saved;
+  document.getElementById('led').className = 'hled';
+}
 updateAmt();
-document.getElementById('hint-nodev').style.display = 'block';
+renderHistory();
 </script>
 </body>
 </html>
